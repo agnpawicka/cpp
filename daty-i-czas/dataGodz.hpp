@@ -4,7 +4,7 @@
 
 #include "Data.hpp"
 
-class DataGodz final : Data{
+class DataGodz final : public Data{
 private:
     int godzina;
     int minuty;

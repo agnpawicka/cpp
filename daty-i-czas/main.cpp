@@ -39,13 +39,18 @@ int main() {
 
 
 
+
+
+    std::cout<<"Testoanie sortowania wektora wydarzeń\n";
+
     DataGodz p(1998,5,23,22,15,0);
     std::vector<Wydarzenie> vec;
     vec.emplace_back(Wydarzenie(DataGodz(),"teraz"));
     vec.emplace_back(Wydarzenie(p,"dzień urodzenia"));
     vec.emplace_back(Wydarzenie(DataGodz(2017),"początek studiów"));
     sort(vec.begin(),vec.end());
-    for (auto v:vec)std::cout << v.zdarzenie << std::endl;
-    p-=3600;
-    std::cout << "Seconds on this cruel world: " << DataGodz()-p << std::endl;
+    for (auto v:vec){
+        std::cout << v.zdarzenie <<" "<< ((v.termin).getDzien());
+        std::cout<<"."<<(v.termin).getMiesiac()<< "."<<(v.termin).getRok()<<std::endl;
+    }
 }
