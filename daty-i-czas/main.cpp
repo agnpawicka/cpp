@@ -6,7 +6,7 @@ int main() {
 
     std::cout<<"Testy dla klasy Data\n\n";
 
-    std::cout<<" Próba utorzenia błędniej daty:  ";
+    std::cout<<" Próba utworzenia błędniej daty:  ";
     try{
         Data blad(29, 2, 1900);
     }
@@ -39,7 +39,7 @@ int main() {
 
     std::cout<<"\n\nTesty dla klasy DataGodz\n\n";
     try {
-        DataGodz poczatekZajec(2018, 3, 28, 16, 15, 0);
+        DataGodz poczatekZajec(2018, 3, 28, 18, 15, 0);
         DataGodz dokladnieTeraz;
         long long czasTrwania=dokladnieTeraz-poczatekZajec;
         std::cout<<"Pracownia trwa już "<<czasTrwania<<" sekund\n";

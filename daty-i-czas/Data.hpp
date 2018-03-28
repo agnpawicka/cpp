@@ -37,7 +37,7 @@ public:
     Data(const Data &data)= default;
     Data &operator=(const Data &data)= default;
 
-    virtual int operator-(const Data &data);
+    int operator-(const Data &data);
 
     Data &operator--();
     Data &operator++();
