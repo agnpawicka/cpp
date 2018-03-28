@@ -35,13 +35,48 @@ int main() {
     if(Wielkanoc.getRok()!=2017 or Wielkanoc.getMiesiac()!=3 or Wielkanoc.getDzien()!=27)
         std::cout<<"Żle odejmuje dni\n";
 
+
+
     std::cout<<"\n\nTesty dla klasy DataGodz\n\n";
+    try {
+        DataGodz poczatekZajec(2018, 3, 28, 16, 15, 0);
+        DataGodz dokladnieTeraz;
+        long long czasTrwania=dokladnieTeraz-poczatekZajec;
+        std::cout<<"Pracownia trwa już "<<czasTrwania<<" sekund\n";
+
+        ++poczatekZajec;
+        --dokladnieTeraz;
+        std::cout<<"Gdyby zaczęła się sekundę później, a program byłby uruchomiony sekundę wcześniej\n"
+                "minęłoby "<<dokladnieTeraz-poczatekZajec<<" sekund\n";
+        --poczatekZajec;
+        ++dokladnieTeraz;
+        poczatekZajec+=czasTrwania;
+        std::cout<<"A gdyby zaczęła się dokładnie teraz, trwałaby "<<dokladnieTeraz-poczatekZajec<<" sekund\n";
+        poczatekZajec-=czasTrwania;
+        std::cout<<"Zaczęła się jednak o "<<poczatekZajec.getGodzina()<<":"<<poczatekZajec.getMinuty()<<":"
+                ""<<poczatekZajec.getSekundy()<<" dnia "<<poczatekZajec.getDzien()<<"."<<poczatekZajec.getMiesiac()<<"."
+                ""<<poczatekZajec.getRok()<<"\n";
+
+
+        DataGodz kopia(poczatekZajec);
+        if(kopia==poczatekZajec) std::cout<<"\nSprawdzono operator == oraz konstruktor kopiujący\n";
+
+        std::cout<<"kopia "<<kopia.getGodzina()<<":"<<kopia.getMinuty()<<":"
+                ""<<kopia.getSekundy()<<" dnia "<<kopia.getDzien()<<"."<<kopia.getMiesiac()<<"."
+                         ""<<kopia.getRok()<<"\n";
+        kopia=dokladnieTeraz;
+        if(!(kopia==dokladnieTeraz)) std::cout<<"przypisanie kopiujące nie działa\n";
+
+    }
+    catch (const std::exception &e){
+        std::cout<<e.what()<<"\n";
+    }
 
 
 
 
 
-    std::cout<<"Testoanie sortowania wektora wydarzeń\n";
+   std::cout<<"\n\nTestowanie sortowania wektora wydarzeń\n";
 
     DataGodz p(1998,5,23,22,15,0);
     std::vector<Wydarzenie> vec;

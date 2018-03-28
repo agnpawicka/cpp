@@ -4,7 +4,7 @@
 DataGodz::DataGodz(int rok, int miesiac, int dzien, int godzina, int minuty, int sekundy) {
     if(!poprawnaDG(dzien, miesiac, rok, godzina, minuty, sekundy)) throw std::invalid_argument("podano niepoprawną datę");
     this->godzina=godzina;
-    this->miesiac=miesiac;
+    this->minuty=minuty;
     this->sekundy=sekundy;
     this->dzien=dzien;
     this->miesiac=miesiac;
@@ -58,10 +58,10 @@ long long DataGodz::roznicaWdniach(const DataGodz &dg) {
 }
 
 long long DataGodz::roznicaCzasu(const DataGodz &dg) {
-    long long sek=(dg.godzina-godzina)*3600;
-    sek+=(dg.minuty-minuty)*60;
-    sek+=(dg.sekundy-sekundy);
-    return -sek;
+    long long sek=(godzina-dg.godzina)*3600;
+    sek+=(minuty-dg.minuty)*60;
+    sek+=(sekundy-dg.sekundy);
+    return sek;
 
 }
 
@@ -149,7 +149,7 @@ DataGodz &DataGodz::operator-=(int sec) {
 DataGodz &DataGodz::operator+=(int sec) {
     int dni=sec/(24*3600);
     dodajDni(dni);
-    sec/=(24*3600);
+    sec%=(24*3600);
     godzina+=sec/3600;
     sec%=3600;
     minuty+=sec/60;
@@ -171,7 +171,7 @@ DataGodz &DataGodz::operator+=(int sec) {
 }
 
 bool DataGodz::operator==(const DataGodz &dg)  {
-    return rok==dg.rok and miesiac==dg.miesiac and dzien==dg.dzien and godzina==dg.godzina and minuty==dg.miesiac and sekundy==dg.sekundy;
+    return rok==dg.rok and miesiac==dg.miesiac and dzien==dg.dzien and godzina==dg.godzina and minuty==dg.minuty and sekundy==dg.sekundy;
 }
 
 
