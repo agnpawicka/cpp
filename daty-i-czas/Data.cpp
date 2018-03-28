@@ -39,14 +39,14 @@ Data::Data() {
 }
 
 int Data::ileDniOdUstalonejDaty(Data data) {
-    int dni=(data.rok - rok) *365;
-    dni+=(data.rok/4 -rok/4);
-    dni+=(rok/100 - data.rok/100);
-    dni+=(data.rok/400 - rok/400);
-    if(rokPrzestepny(data.rok)) dni--;
-    if(rokPrzestepny(rok)) dni++;
-    dni+=dniodpoczroku[rokPrzestepny(data.rok)][data.miesiac-1]+data.dzien;
-    dni-=dniodpoczroku[rokPrzestepny(rok)][miesiac-1]+dzien;
+    int dni=(rok - data.rok) *365;
+    dni+=(rok/4 -data.rok/4);
+    dni+=(data.rok/100 - rok/100);
+    dni+=(rok/400 - data.rok/400);
+    if(rokPrzestepny(rok)) dni--;
+    if(rokPrzestepny(data.rok)) dni++;
+    dni-=dniodpoczroku[rokPrzestepny(data.rok)][data.miesiac-1]+data.dzien;
+    dni+=dniodpoczroku[rokPrzestepny(rok)][miesiac-1]+dzien;
     return dni;
 }
 

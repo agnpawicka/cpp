@@ -176,7 +176,7 @@ bool DataGodz::operator==(const DataGodz &dg)  {
 
 
 bool DataGodz::operator<(const DataGodz &dg) {
-    return *this-dg>0;
+    return (*this-dg)<0;
 }
 
 
