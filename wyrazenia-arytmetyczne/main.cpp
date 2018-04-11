@@ -150,6 +150,7 @@ int main(){
 
 
     /**testowanie nawiasowana*/
+std::cout<<"\n\n\n";
 
 //sin(a^(b*pi) /a+log(e^(3%2))(-d+|15- 1/d|)
     Wyrazenie *test1=new dodaj(
@@ -187,5 +188,25 @@ int main(){
                    )
            )
     );
-    std::cout<<test1->opis()<<"\n";
-}
+    std::cout<<test1->opis()<<"\n\n";
+
+    //ln e- (ln e^2 - ln e^3)
+    Wyrazenie *test2 = new odejmij(
+            new Ln(
+                    new e()
+            ),
+            new odejmij(
+                    new Ln(
+                            new Exp(
+                                    new liczba(2)
+                            )
+                    ),
+                    new Ln(
+                            new Exp(
+                                    new liczba(3)
+                            )
+                    )
+            )
+    );
+    std::cout<<test2->opis()<<" = "<<test2->oblicz()<<"\n\n";
+ }

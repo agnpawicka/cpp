@@ -7,7 +7,7 @@ double Exp::oblicz() {
 
 Exp::Exp(Wyrazenie *fstArg) {
     this->fstArg=fstArg;
-    Nazwa="e^";
+    Nazwa="e ^";
     if(fstArg== nullptr)
         throw std::invalid_argument("nie podano argumentu e^x\n");
     priorytet=6;
