@@ -12,3 +12,6 @@ Cos::Cos(Wyrazenie* fstArg) {
         throw std::invalid_argument("nie podano argumentu cosinusa\n");
     priorytet=4;
 }
+std::string Cos::opis() {
+    return nazwa()+'('+fstArg->opis()+')';
+}

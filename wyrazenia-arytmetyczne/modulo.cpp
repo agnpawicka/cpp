@@ -7,7 +7,7 @@ double modulo::oblicz() {
 modulo::modulo(Wyrazenie *fstArg, Wyrazenie *sndArg) {
     this->fstArg=(fstArg);
     this->sndArg=(sndArg);
-    Nazwa="mod";
+    Nazwa="%";
     if(fstArg== nullptr or sndArg== nullptr)
         throw std::invalid_argument("nie podano wszystkich argumentów reszty z dzielenia\n");
     priorytet=1;

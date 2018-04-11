@@ -1,11 +1,11 @@
 
 #include "odwrtnosc.hpp"
 
-double Odw::oblicz() {
+double odwrotnosc::oblicz() {
     return 1/fstArg->oblicz();
 }
 
-Odw::Odw(Wyrazenie *fstArg) {
+odwrotnosc::odwrotnosc(Wyrazenie *fstArg) {
     this->fstArg=fstArg;
     Nazwa="odwrotnosc";
     if(fstArg== nullptr)
@@ -14,7 +14,7 @@ Odw::Odw(Wyrazenie *fstArg) {
 
 }
 
-std::string Odw::opis() {
+std::string odwrotnosc::opis() {
     if(fstArg->getPriorytet()<priorytet)
         return "1/"+'('+fstArg->opis()+')';
     else  return "1/"+fstArg->opis();

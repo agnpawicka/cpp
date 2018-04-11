@@ -43,5 +43,5 @@ void zmienna::zmienZmienna(std::string klucz, double wartosc) {
             return;
         }
     }
-    throw std::exception();
+    throw std::invalid_argument("nie znaleziono zmiennej do zmiany\n");
 }

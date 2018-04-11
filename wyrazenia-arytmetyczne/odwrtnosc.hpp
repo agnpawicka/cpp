@@ -3,10 +3,10 @@
 #define CPP_ODWRTNOSC_HPP
 
 #include "operator1arg.hpp"
-class Odw : public operator1arg{
+class odwrotnosc : public operator1arg{
 public:
     double oblicz() override ;
-    Odw(Wyrazenie* fstArg);
+    odwrotnosc(Wyrazenie* fstArg);
     std::string opis() override ;
 };
 #endif //CPP_ODWRTNOSC_HPP

@@ -11,3 +11,7 @@ Sin::Sin(Wyrazenie* fstArg)  {
         throw std::invalid_argument("nie podano argumentu sinusa\n");
     priorytet=4;
 }
+
+std::string Sin::opis() {
+     return nazwa()+'('+fstArg->opis()+')';
+}
