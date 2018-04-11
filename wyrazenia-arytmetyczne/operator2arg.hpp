@@ -8,5 +8,6 @@ protected:
     Wyrazenie * sndArg;
 public:
     std::string opis() override ;
+    ~operator2arg() override ;
 };
 #endif //CPP_OPERATOR2ARG_HPP

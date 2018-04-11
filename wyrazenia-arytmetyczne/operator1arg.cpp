@@ -5,3 +5,7 @@ std::string operator1arg::opis() {
         return nazwa()+" ("+fstArg->opis()+')';
     else  return nazwa()+" "+fstArg->opis();
 }
+
+operator1arg::~operator1arg() {
+    delete fstArg;
+}

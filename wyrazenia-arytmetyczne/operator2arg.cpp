@@ -17,3 +17,9 @@ std::string operator2arg::opis() {
     }
     return Opis+" "+sndArg->opis();
 }
+
+operator2arg::~operator2arg() {
+
+    delete sndArg;
+
+}

@@ -9,5 +9,6 @@ protected:
     Wyrazenie* fstArg;
 public:
     std::string opis() override ;
+    ~operator1arg() override ;
 };
 #endif //CPP_OPERATOR1ARG_HPP

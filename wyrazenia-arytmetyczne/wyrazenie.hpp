@@ -17,6 +17,6 @@ public:
 
     virtual double oblicz()=0;
     virtual std::string opis()=0;
+    virtual ~Wyrazenie()= default;
 };
-
 #endif //CPP_WYRAZENIE_HPP

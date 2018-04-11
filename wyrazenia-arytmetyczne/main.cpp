@@ -59,6 +59,7 @@ int main(){
     std::cout << std::fixed;
     std::cout.precision(3);
     demo();
+
     Wyrazenie *w = new odejmij(
             new pi(),
             new dodaj(
@@ -72,6 +73,7 @@ int main(){
     std::cout<<w->opis()<<std::endl;
     zmienna::zmienZmienna("x", 1);
     std::cout<<w->oblicz()<<"\n";
+    delete w;
 
     Wyrazenie *w1= new  podziel(//((x-1)*x)/2
             new pomnoz(
@@ -146,7 +148,10 @@ int main(){
         std::cout << "w4(" << it << ")= " << w4->oblicz() << "\n";
         it += 0.01;
     }
-
+    delete w1;
+    delete w2;
+    delete w3;
+    delete w4;
 
 
     /**testowanie nawiasowana*/
@@ -189,7 +194,7 @@ std::cout<<"\n\n\n";
            )
     );
     std::cout<<test1->opis()<<"\n\n";
-
+    delete test1;
     //ln e- (ln e^2 - ln e^3)
     Wyrazenie *test2 = new odejmij(
             new Ln(
@@ -209,7 +214,7 @@ std::cout<<"\n\n\n";
             )
     );
     std::cout<<test2->opis()<<" = "<<test2->oblicz()<<"\n\n";
-
+    delete test2;
     //ln (cos (|15-7*fi|))
     Wyrazenie *test3 = new Ln(
             new Cos(
@@ -225,5 +230,5 @@ std::cout<<"\n\n\n";
             )
     );
     std::cout<<test3->opis()<<"\n\n";
-
+    delete test3;
 }
