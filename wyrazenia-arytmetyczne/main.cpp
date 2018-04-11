@@ -209,4 +209,21 @@ std::cout<<"\n\n\n";
             )
     );
     std::cout<<test2->opis()<<" = "<<test2->oblicz()<<"\n\n";
- }
+
+    //ln (cos (|15-7*fi|))
+    Wyrazenie *test3 = new Ln(
+            new Cos(
+                    new bezwzgledna(
+                            new odejmij(
+                                    new liczba(15),
+                                    new pomnoz(
+                                            new liczba(7),
+                                            new fi()
+                                    )
+                            )
+                    )
+            )
+    );
+    std::cout<<test3->opis()<<"\n\n";
+
+}
