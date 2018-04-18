@@ -1,3 +1,13 @@
+/**
+	Ze względu na limit plików na skosie, wśród plików znajdują się wyłącznie headery (prawie wszystkie) oraz main.cpp
+	Cały projekt znajduje się https://github.com/agnpawicka/cpp/tree/master/wyrazenia-arytmetyczne*/
+
+
+
+
+
+
+
 #include "pi.hpp"
 #include "e.hpp"
 #include "fi.hpp"
@@ -17,8 +27,7 @@
 #include "modulo.hpp"
 #include "potega.hpp"
 #include "logarytm.hpp"
-
-/*Funkcje pr(Wyrazenie*) oraz demo() są autorstwa Maxa Polarczyka*/
+/*Funkcje pr(Wyrazenie*) oraz demo() są autorstwa Maksymiliana Polarczyka*/
 
 void pr(Wyrazenie *e) {
     std::cout << e->opis() << "\t=\t" << e->oblicz() << std::endl;
