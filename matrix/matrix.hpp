@@ -37,14 +37,14 @@ namespace obliczenia {
 
         Matrix &operator*=(const Matrix &y)throw(DiferentSize);
 
-        friend Matrix operator*(const Matrix &x, const double &skalar) throw(Skalar0);
+        friend Matrix operator*(const Matrix &x, const double &skalar) ;
 
-        Matrix &operator*=(const double &skalar)  throw(Skalar0);
+        Matrix &operator*=(const double &skalar)   ;
 
         friend Matrix operator-(const Matrix &x, const Matrix &y) throw(DiferentSize);
-
         Matrix &operator-=(const Matrix &y) throw(DiferentSize);
-        Matrix & operator-(const Matrix &y) throw(NotDefined);
+
+        Matrix & operator-() ;
 
     public:
         void swapRows(int r1, int r2)throw(DiferentSize);
@@ -63,8 +63,8 @@ namespace obliczenia {
         Matrix *remove(int col, int row  )throw(DiferentSize);
 
     public:
-        Matrix *rev() throw(NotDefined);
-        double det() throw(NotDefined);
+        Matrix *rev() throw(Undefined);
+        double det() throw(Undefined);
     };
 
 }

@@ -22,7 +22,7 @@ public:
         return "Próba mnożenia przez zerowy skalar";
     }
 };
-class NotDefined : public Except{
+class Undefined : public Except{
 public:
     const  char * what() override {
         return "Działanie niezdefiniowane dla danego typu macierzy";

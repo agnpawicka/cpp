@@ -18,7 +18,7 @@ namespace obliczenia {
 
     Matrix::Matrix(int n, int m) {
         this->n = n;
-        this->m = n;
+        this->m = m;
         M = new double *[n];
         for (int i = 0; i < n; i++) {
             M[i] = new double[m];
@@ -89,8 +89,8 @@ namespace obliczenia {
         return *nowe;
     }
 
-    Matrix &Matrix::operator*=(const double &skalar)throw(Skalar0) {
-        if (skalar == 0) throw Skalar0();
+    Matrix &Matrix::operator*=(const double &skalar) {
+       // if (skalar == 0) throw Skalar0();
         for (int i = 0; i < n; i++)
             for (int j = 0; j < m; j++) {
                 M[i][j] *= skalar;
@@ -98,7 +98,7 @@ namespace obliczenia {
         return *this;
     }
 
-    Matrix operator*(const Matrix &x, const double &skalar) throw(Skalar0) {
+    Matrix operator*(const Matrix &x, const double &skalar)  {
         if (skalar == 0) throw Skalar0();
         auto nowe = new Matrix(x);
         (*nowe) *= skalar;
@@ -149,11 +149,10 @@ namespace obliczenia {
         return *nowe;
     }
 
-Matrix &Matrix::operator-(const Matrix &y) throw(NotDefined) {
-    if(y.m!=y.n) throw  NotDefined();
-    auto T= new Matrix(y);
-    for(int i=0; i<T->n; i++) for(int j=i+1; j<T->m; j++){
-            std::swap (T->M[i][j], T->M[j][i]);
+Matrix &Matrix::operator-() {
+    auto T= new Matrix(m, n);
+    for(int i=0; i<T->n; i++) for(int j=0; j<T->m; j++){
+            T->M[i][j]=M[j][i];
         }
     return *T;
 }
@@ -220,15 +219,15 @@ Matrix &Matrix::operator-(const Matrix &y) throw(NotDefined) {
     std::ostream &operator<<(std::ostream &wy, const Matrix &x) {
         for (int i = 0; i < x.n; i++) {
             for (int j = 0; j < x.m; j++) {
-                wy << std::to_string(x.M[i][j]) << " ";
+                wy << x.M[i][j] << " ";
             }
             wy << "\n";
         }
         return wy;
     }
 
-    Matrix *Matrix::rev()throw(NotDefined) {
-        if (n != m or det()==0) throw NotDefined();
+    Matrix *Matrix::rev()throw(Undefined) {
+        if (n != m or det()==0) throw Undefined();
         auto same= new Matrix(*this);
         auto reversed  = new Matrix(n);
         double mult;
@@ -263,8 +262,8 @@ Matrix &Matrix::operator-(const Matrix &y) throw(NotDefined) {
         return reversed;
     }
 
-    double Matrix::det()throw(NotDefined) {
-        if (n != m) throw NotDefined();
+    double Matrix::det()throw(Undefined) {
+        if (n != m) throw Undefined();
         auto same= new Matrix(*this);
         double mult;
         bool minus=0;
