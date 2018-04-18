@@ -44,8 +44,10 @@ namespace obliczenia {
     }
 
     Matrix::~Matrix() {
-        for (int i = 0; i < n; i++) delete[] M[i];
-        delete[] M;
+        if(this!= nullptr) {
+            for (int i = 0; i < n; i++) delete[] M[i];
+            delete[] M;
+        }
     }
 
     Matrix &Matrix::operator=(const Matrix &matrix) {
@@ -269,7 +271,7 @@ Matrix &Matrix::operator-() {
         bool minus=0;
         for(int i=0; i<n; i++) {
             if (same->M[i][i] == 0) {
-                for (int j = i + 1; j < n; j++)
+                for (int j = 0; j < n; j++) if(j!=i)
                     if (M[j][i] != 0) {
                         same->swapRows(j, i);
                         minus ^= ((j - i) % 2);
