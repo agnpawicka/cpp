@@ -3,5 +3,5 @@ project(cpp)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES  matrix/matrix.cpp matrix/matrix.hpp matrix/main.cpp matrix/Except.hpp)
+set(SOURCE_FILES   wymierne/wymierna.cpp wymierne/wymierna.hpp wymierne/main.cpp wymierne/wyjatek_wymierny.hpp)
 add_executable(cpp ${SOURCE_FILES})

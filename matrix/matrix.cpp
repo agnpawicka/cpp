@@ -67,14 +67,18 @@ namespace obliczenia {
     }
 
     Matrix &Matrix::operator=(Matrix &&matrix) noexcept {
+        std::swap(this->M, matrix.M);
+        delete matrix;
+        /*
         for (int i = 0; i < n; i++) {
+
             delete[] M[i];
         }
         delete[] M;
         M = matrix.M;
         m = matrix.m;
         n = matrix.n;
-        matrix.M = nullptr;
+        matrix.M = nullptr;*/
         return *this;
     }
 
@@ -271,7 +275,7 @@ Matrix &Matrix::operator-() {
         bool minus=0;
         for(int i=0; i<n; i++) {
             if (same->M[i][i] == 0) {
-                for (int j = 0; j < n; j++) if(j!=i)
+                for (int j = i+1; j < n; j++) if(j!=i)
                     if (M[j][i] != 0) {
                         same->swapRows(j, i);
                         minus ^= ((j - i) % 2);

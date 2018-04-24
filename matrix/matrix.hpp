@@ -44,7 +44,7 @@ namespace obliczenia {
         friend Matrix operator-(const Matrix &x, const Matrix &y) throw(DiferentSize);
         Matrix &operator-=(const Matrix &y) throw(DiferentSize);
 
-        Matrix & operator-() ;
+        Matrix & operator-() ;//transpozycja
 
     public:
         void swapRows(int r1, int r2)throw(DiferentSize);
