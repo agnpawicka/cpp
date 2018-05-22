@@ -16,10 +16,6 @@ int main(){
 
     std::cout<<a<<" "<<b<<"\n";
 
-    ///testowanie wyjątków::
-    auto x1 = new Wymierna(1, INT32_MAX);
-    auto x2= new Wymierna(1, 1<<15);
-
 
 
 
@@ -27,6 +23,12 @@ int main(){
     auto a1=new Wymierna(1, 9);
     std::cout<<*a1<<"\n";
     auto a2=new Wymierna(4, 30);
-    std::cout<<*a2;
-    std::cout<<"1/2^15 + 1/MAXINT"<<*x1+*x2<<"\n";
+    std::cout<<*a2<<"\n";
+
+
+    ///testowanie wyjątków::
+    auto x1 = new Wymierna(1, INT32_MAX);
+    auto x2= new Wymierna(1, 1<<15);
+    std::cout<<x1->getLicznik()<<" "<<x1->getMianownik()<<"\n";
+    //std::cout<<"1/2^15 + 1/MAXINT"<<*x1+*x2<<"\n";
 }

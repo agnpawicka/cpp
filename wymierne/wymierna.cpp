@@ -69,7 +69,7 @@ namespace obliczenia {
         GDB = gdb(std::abs(licznik), mianownik);
         licznik /= (int) GDB;
         mianownik /= (int) GDB;
-        std::cout<<"Sprawdzenie jak wygląda drugi argument  po dodawaniu "<<y<<"\n";
+        //std::cout<<"Sprawdzenie jak wygląda drugi argument  po dodawaniu "<<y<<"\n";
         return *this;
     }
 
