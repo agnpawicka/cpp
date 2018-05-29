@@ -1,8 +1,6 @@
 
 #include "bst.hpp"
 
-template <typename T, class cmp> std::ostream& operator<< (std::ostream &, const Struktury::Bst<T, cmp> &);
-
 
 ///funkcje klasy node
 template<typename T, class cmp>
@@ -15,26 +13,18 @@ Struktury::Bst<T, cmp>::node::node(Struktury::Bst<T, cmp>::node *N) {
 template<typename T, class cmp>
 Struktury::Bst<T, cmp>::node::node(T var) {
     this->var = var;
+    this->leftSon= nullptr;
+    this->rightSon= nullptr;
 }
 
 template<typename T, class cmp>
 Struktury::Bst<T, cmp>::node::~node() {
     if (leftSon != nullptr) delete leftSon;
     if (rightSon != nullptr) delete rightSon;
-    leftSon = nullptr;
-    rightSon = nullptr;
+    //leftSon = nullptr;
+    //rightSon = nullptr;
 }
 
-///definicja drugiego komparatora
-
-template<typename T, class cmp>
-bool Struktury::Bst<T, cmp>::sndCmp(const T &a,const  T &b) {
-    if(cmp(a, b)){
-        if (cmp(b ,a)) return true;
-        return false;
-    }
-    return true;
-}
 
 ///konstruktory i destruktor
 
@@ -59,7 +49,8 @@ template<typename T, class cmp>
 template<typename T, class cmp>
 ::Struktury::Bst<T, cmp>::Bst(std::initializer_list<T> l) {
     for (auto it : l){
-        insideInsert(top, (it));
+        if(top== nullptr) top=new node((it));
+        else    insideInsert(top, (it));
     }
 }
 
@@ -87,50 +78,145 @@ Struktury::Bst<T, cmp> &Struktury::Bst<T, cmp>::operator=(Struktury::Bst<T, cmp>
     return *this;
 }
 
-template<typename T, class cmp> std::ostream &operator<<(std::ostream &wy, const Struktury::Bst<T, cmp> &bst){
-
-    return wy;
-}
-
 template<typename T, class cmp>
 void Struktury::Bst<T, cmp>::insert(T elem) {
-    insideInsert(top, elem);
+    if(top== nullptr) top=new node(elem);
+    else    insideInsert(top, elem);
 }
 
 template<typename T, class cmp>
 void Struktury::Bst<T, cmp>::erase(T elem) {
-    insideErase(top, elem);
+    if (top== nullptr) throw std::logic_error("elementu do usunięcia nie ma w drzewie");
+    if(cmp()(top->var,elem) and cmp()(elem, top->var)){
+        if(top->leftSon== nullptr) top=top->rightSon;
+        else if(top->rightSon== nullptr) top=top->leftSon;
+        else{
+            auto l=top->leftSon;
+            auto r=top->rightSon;
+            if(l->rightSon== nullptr){
+                l->rightSon=r;
+                top=l;
+                return;
+            }
+            if(r->leftSon== nullptr){
+                r->leftSon=l->rightSon;
+                l->rightSon=r;
+                top=l;
+                return;
+            }
+            auto ll=l->rightSon;
+            l->rightSon=r;
+            top=l;
+            while(r->leftSon!= nullptr)r=r->leftSon;
+            r->leftSon=ll;
+            return;
+        }
+    }
+    else insideErase(top, elem);
 }
 
 template<typename T, class cmp>
 bool Struktury::Bst<T, cmp>::search(T elem) {
-    return insideSearch(top, elem);
+    bool x = insideSearch(top, elem);
+    return x;
 }
 
 template<typename T, class cmp>
-void Struktury::Bst<T, cmp>::insideInsert(Struktury::Bst<T, cmp>::node *current, const T &elem) {
-    if (current == nullptr) current = &elem;
-    else if (cmp(current->var, elem) and cmp(top, current->var)) throw std::exception();
-    else if (cmp(current->var, elem)) insideInsert(current->rightSon, elem);
-    else insideInsert(current->leftSon, elem);
-}
-
-template<typename T, class cmp>
-bool Struktury::Bst<T, cmp>::insideSearch(const Struktury::Bst<T, cmp>::node *current, const T &elem) {
-    if (current == nullptr) return false;
-    else if (cmp(current->var, elem) and cmp(top, current->var)) return true;
-    else if (cmp(current->var, elem)) insideSearch(current->rightSon, elem);
-    else insideSearch(current->leftSon, elem);
-}
-
-template<typename T, class cmp>
-void Struktury::Bst<T, cmp>::insideErase(Struktury::Bst<T, cmp>::node *current, const T &elem) {
-    if (current == nullptr) throw std::exception();
-    else if (cmp(current->var, elem) and cmp(top, current->var)){
-        //uzupełnić ensownie jakos
+void Struktury::Bst<T, cmp>::insideInsert(Struktury::Bst<T, cmp>::node *current,  T elem) {
+    if (current == nullptr)throw std::exception();
+    else if (cmp()(current->var, elem) and cmp()(elem, current->var)) throw std::logic_error("element do wstawienia już jest w drzewie");
+    else if (cmp()(current->var, elem)){
+        if(current->rightSon== nullptr){
+            current->rightSon=new node(elem);
+        }
+        else insideInsert(current->rightSon, elem);
     }
-    else if (cmp(current->var, elem)) insideErase(current->rightSon, elem);
-    else insideErase(current->leftSon, elem);
+    else {
+        if(current->leftSon== nullptr){
+            current->leftSon=new node(elem);
+        }
+        else
+            insideInsert(current->leftSon, elem);
+    }
+}
+
+template<typename T, class cmp>
+bool Struktury::Bst<T, cmp>::insideSearch(const Struktury::Bst<T, cmp>::node *current, T elem) {
+    if (current == nullptr) return false;
+    else if (cmp()(current->var, elem) and cmp()(elem, current->var)) return true;
+    else if (cmp()(current->var, elem)) return  insideSearch(current->rightSon, elem);
+    else return insideSearch(current->leftSon, elem);
+}
+
+template<typename T, class cmp>
+void Struktury::Bst<T, cmp>::insideErase(Struktury::Bst<T, cmp>::node *current,  T elem) {
+    if (current == nullptr) throw std::logic_error("elementu do usunięcia nie ma w drzewie");
+    else if (cmp()(current->var, elem)){//jeśli coś z prawego poddrzewa:
+        if(current->rightSon== nullptr) throw std::logic_error("elementu do usunięcia nie ma w drzewie");
+        if(cmp()(current->rightSon->var, elem) and cmp()(elem, current->rightSon->var)){
+            if(current->rightSon->leftSon== nullptr){
+                current->rightSon=current->rightSon->rightSon;
+                return;
+            }
+            if(current->rightSon->rightSon== nullptr){
+                current->rightSon=current->rightSon->leftSon;
+                return;
+            }
+            auto l=current->rightSon->leftSon;
+            auto r=current->rightSon->rightSon;
+            if(l->rightSon== nullptr){
+                l->rightSon=r;
+                current->rightSon=l;
+                return;
+            }
+            if(r->leftSon== nullptr){
+                r->leftSon=l->rightSon;
+                l->rightSon=r;
+                current->rightSon=l;
+                return;
+            }
+            auto ll=l->rightSon;
+            l->rightSon=r;
+            current->rightSon=l;
+            while(r->leftSon!= nullptr)r=r->leftSon;
+            r->leftSon=ll;
+            return;
+
+        }else insideErase(current->rightSon, elem);
+    }
+    else {
+        if(current->leftSon== nullptr) throw std::logic_error("elementu do usunięcia nie ma w drzewie");;
+        if(cmp()(current->leftSon->var, elem) and cmp()(elem, current->leftSon->var)){
+            if(current->leftSon->leftSon== nullptr){
+                current->leftSon=current->leftSon->rightSon;
+                return;
+            }
+            if(current->leftSon->rightSon== nullptr){
+                current->leftSon=current->leftSon->leftSon;
+                return;
+            }
+            auto l=current->leftSon->leftSon;
+            auto r=current->leftSon->rightSon;
+            if(l->rightSon== nullptr){
+                l->rightSon=r;
+                current->leftSon=l;
+                return;
+            }
+            if(r->leftSon== nullptr){
+                r->leftSon=l->rightSon;
+                l->rightSon=r;
+                current->leftSon=l;
+                return;
+            }
+            auto ll=l->rightSon;
+            l->rightSon=r;
+            current->leftSon=l;
+            while(r->leftSon!= nullptr)r=r->leftSon;
+            r->leftSon=ll;
+            return;
+
+        }else insideErase(current->rightSon, elem);
+    }
 }
 
 

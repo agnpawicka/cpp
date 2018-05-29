@@ -3,9 +3,10 @@
 #define CPP_BST_HPP
 
 #include <iostream>
+#include <functional>
 
 namespace Struktury {
-    template<typename T, class cmp=std::greater<T>>
+    template<typename T, class cmp=std::less_equal<T>>
     class Bst {
     private:
         class node {
@@ -19,16 +20,22 @@ namespace Struktury {
             node(node *N);
 
             ~node();
+            friend std::ostream &operator<< (std::ostream &out,  node* n){
+                if(n->leftSon!= nullptr) out<<n->leftSon<<" ";
+                out<<n->var;
+                if(n->rightSon!= nullptr) out<<" "<<n->rightSon;
+                return out;
+            }
         };
 
         node *top = nullptr;
 
-        bool sndCmp(const T &a, const T &b);
-
         Bst(node *N);
 
     public:
-        Bst() = default;
+        Bst(){
+
+        };
 
         Bst(Bst &bst);
 
@@ -40,19 +47,25 @@ namespace Struktury {
 
           Bst&operator=(const Bst &bst);
           Bst&operator=(Bst &&bst) noexcept ;
-          friend std::ostream &operator<< <> (std::ostream &, const Bst<T, cmp> &);
+          friend std::ostream &operator<< (std::ostream &out, const Bst<T, cmp> &bst){
+              if (bst.top!= nullptr){
+                  out << bst.top;
+              }
+              return out;
+          }
           void insert(T elem);
           void erase(T elem);
           bool search(T elem);
 
       private:
-          void insideInsert(node *current, const T &elem);
+          void insideInsert(node *current, T elem);
 
-          bool insideSearch(const node *current, const T &elem);
+          bool insideSearch(const node *current,  T elem);
 
-          void insideErase(node *current, const T &elem);
+          void insideErase(node *current,  T elem);
 
     };
+
 
 };
 #endif //CPP_BST_HPP
