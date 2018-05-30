@@ -7,7 +7,7 @@ In& operator>>(In &ini, int &a) {
 
 In::In(std::string name) {
     try {
-        file.open(name, std::ifstream::in | std::ifstream::app );
+        file.open(name, std::ifstream::in | std::ifstream::binary );
     }
     catch (const std::ifstream::failure &e) {
         throw e;

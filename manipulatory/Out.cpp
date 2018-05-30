@@ -4,7 +4,7 @@
 
 Out::Out(std::string name) {
     try {
-        file.open(name, std::ofstream::out | std::ofstream::app);
+        file.open(name, std::ofstream::out | std::ofstream::binary);
     }
     catch (const std::ofstream::failure &e) {
         throw e;

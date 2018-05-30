@@ -46,11 +46,14 @@ int main(){
 //        std::cout<<Strumienie::indeks(vec[i].second, 5)<<Strumienie::colon<<vec[i].first<<Strumienie::endline;
 //    }
 
-    char aa='a';
-    char bb='b';
+    std::string aa="sialala";
+    std::string bb="";
+    char c;
     try {
         auto wyj = new Out("name");
-        (*wyj).file << aa;
+        for(int i=0; i<aa.size(); i++) {
+            (*wyj).file << aa[i];
+        }
         delete wyj;
     }
     catch (std::ofstream::failure &e){
@@ -58,7 +61,10 @@ int main(){
     }
     try {
         auto wej = new In("name");
-        (*wej).file >> bb;
+        for(int i=0; i<aa.size(); i++) {
+            (*wej).file >> c;
+            bb.push_back(c);
+        }
         delete wej;
     }catch (std::ifstream::failure &e){
 
