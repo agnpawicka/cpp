@@ -7,7 +7,7 @@ class Out{
 public:
     std::ofstream file;
 public:
-    friend Out& operator<<( Out &o, const char &a);
+    friend Out& operator<<( Out &o, const int &a);
     Out(std::string name);
     ~Out();
 };

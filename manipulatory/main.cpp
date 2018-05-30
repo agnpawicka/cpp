@@ -26,49 +26,85 @@ namespace Strumienie {
         return os << ": ";
     }
 }
-int main(){
-    /*std::string a, b;
+int main(int argc, char **argv){
+        if(argc>2) {
+        std::string aa="sialala";
+        std::string bb="";
+        std::string cc="";
+        int  c;
+        std::string nazwa = argv[1];
+        try {
+            auto wyj = new Out(nazwa);
+            for(int i=0; i<aa.size(); i++) {
+                (*wyj) << (int)aa[i];
+            }
+            delete wyj;
+        }
+        catch (std::ofstream::failure &e){
+            std::cout<<e.what();
+        }
+        try {
+            auto wej = new In(nazwa);
+            for(int i=0; i<aa.size(); i++){
+                *wej >>  c;
+                bb.push_back((char)((c+1)%128));
+            }
+            delete wej;
+        }catch (std::ifstream::failure &e){
+            std::cout<<e.what();
+        }
+        nazwa = argv[2];
+        try {
+            auto wyj2 = new Out(nazwa);
+            for(int i=0; i<bb.size(); i++) {
+                (*wyj2) << (int)bb[i];
+            }
+            delete wyj2;
+        }
+        catch (std::ofstream::failure &e){
+            std::cout<<e.what();
+        }
+        try {
+            auto wej2 = new In(nazwa);
+            for(int i=0; i<bb.size(); i++) {
+                (*wej2) >> c;
+                cc.push_back((char)((c+127)%128));
+            }
+            delete wej2;
+        }catch (std::ifstream::failure &e){
+            std::cout<<e.what();
+            std::cout<<e.what();
+        }
+
+        std::cout<<"zawartoć pierwszego pliku"<<Strumienie::colon<<aa<<Strumienie::endline<<"modyfikacja"<<Strumienie::colon;
+        std::cout<<bb<<Strumienie::endline<<"odwrócenie modyfikacji"<<Strumienie::colon<<cc<<Strumienie::endline;
+
+    }
+    std::cout<<"Proszę podać 3 linie znaków"<<Strumienie::colon<<Strumienie::endline;
+    std::string a, b;
     std::cin>>Strumienie::clearline>>a>>b;
-    std::cout<<a<<" "<<b<<" ";
+    std::cout<<"wczytane linie"<<Strumienie::colon<<a<<" "<<b<<" ";
     std::cout << "x"<<Strumienie::colon<<"123123"<<Strumienie::comma <<"123"<<Strumienie::endline;
     std::cout<<Strumienie::indeks(123, 5)<<Strumienie::endline<<Strumienie::indeks(7, 5);
+    std::cout<<"proszę podać słowo dla przetestowania manipulatora 'ignore'"<<Strumienie::colon;
     std::cin >> Strumienie::ignore(5)>>a;
-    std::cout<<a<<Strumienie::endline;*/
+    std::cout<<a<<Strumienie::endline;
 
-//    std::vector<psi> vec;
-//    int num=1;
-//    std::string s;
-//    while (getline(std::cin, s)){
-//        vec.emplace_back(psi(s, num++));
-//    }
-//    std::sort(vec.begin(), vec.end());
-//    for(int i=0; i<num; i++){
-//        std::cout<<Strumienie::indeks(vec[i].second, 5)<<Strumienie::colon<<vec[i].first<<Strumienie::endline;
-//    }
 
-    std::string aa="sialala";
-    std::string bb="";
-    char c;
-    try {
-        auto wyj = new Out("name");
-        for(int i=0; i<aa.size(); i++) {
-            (*wyj).file << aa[i];
-        }
-        delete wyj;
+
+
+    std::cout<<"Proszę podać kilka łańcuchów znaków, zakończć EOF"<<Strumienie::colon<<Strumienie::endline;
+    std::vector<psi> vec;
+    int num=1;
+    std::string s;
+    while (getline(std::cin, s)){
+        vec.emplace_back(psi(s, num));
+        num++;
     }
-    catch (std::ofstream::failure &e){
-
+    std::sort(vec.begin(), vec.end());
+    for(int i=0; i<num; i++){
+        if(vec[i].second!=0)std::cout<<Strumienie::indeks(vec[i].second, 5)<<Strumienie::colon<<vec[i].first<<Strumienie::endline;
     }
-    try {
-        auto wej = new In("name");
-        for(int i=0; i<aa.size(); i++) {
-            (*wej).file >> c;
-            bb.push_back(c);
-        }
-        delete wej;
-    }catch (std::ifstream::failure &e){
 
-    }
-    std::cout<<"a"<<Strumienie::colon<<aa<<Strumienie::endline<<"b"<<Strumienie::colon<<bb<<Strumienie::endline;
 
 }

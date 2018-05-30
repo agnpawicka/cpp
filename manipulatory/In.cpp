@@ -1,7 +1,13 @@
 #include "In.hpp"
 
 In& operator>>(In &ini, int &a) {
-    ini.file>>a;
+    try{
+        ini.file.read((char*)&a, 1);
+        a=a&(127);
+    }
+    catch (std::ifstream::failure &e){
+        throw e;
+    }
     return ini;
 }
 

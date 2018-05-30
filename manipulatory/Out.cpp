@@ -18,7 +18,12 @@ Out::~Out(){
     }
 }
 
-Out &operator<<(Out &o, const char &a) {
-    o.file<<a;
+Out &operator<<(Out &o, const int &a) {
+    try{
+        o.file.write((char*)&a, 1);
+    }
+    catch (std::ofstream::failure &e){
+        throw e;
+    }
     return o;
 }
